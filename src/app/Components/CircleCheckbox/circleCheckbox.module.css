@@ -1,0 +1,22 @@
+.checkboxWrapper {
+    --accent: #77c1af;
+}
+
+.checkboxWrapper input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none ;
+    display: flex;
+    align-items: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+}
+
+.checkboxWrapper input[type="checkbox"]:checked::before {
+    content: "L";
+    transform: scaleX(-1) rotate(-45deg) translate(-4px, -5px);
+    font-size: 1.5em;
+    color: var(--accent);
+}

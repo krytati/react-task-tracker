@@ -1,0 +1,29 @@
+.angleBracket button {
+    width: 3rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: inherit;
+    color: var(--primary-color);
+    transform: scale(0.2, 1);
+    position: relative;
+}
+
+.left ::before {
+    content: "<";
+}
+
+.right ::after {
+    content: ">";
+}
+
+.left :hover {
+    right: 2px;
+    transition: right 0.3s ease;
+}
+
+.right :hover {
+    left: 2px;
+    transition: left 0.3s ease;
+}
+

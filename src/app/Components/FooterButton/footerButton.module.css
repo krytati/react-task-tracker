@@ -1,0 +1,25 @@
+.footerButton {
+    background: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+.selectedTab {
+    padding: 0 5px 0 5px;
+    border: 1px solid var(--primary-color, brown);
+    border-radius: 5px;
+}
+
+.footerButton:disabled {
+    cursor: initial;
+}
+
+.footerButton:hover:not(:disabled) {
+    color: var(--text-color, dimgrey);
+}
+
+.disabledButton{
+    color: var(--disabled-text-color, lightgray);
+}

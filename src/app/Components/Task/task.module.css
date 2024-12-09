@@ -1,0 +1,4 @@
+.done {
+    color: var(--disabled-text-color, lightgray);
+    text-decoration: line-through;
+}
