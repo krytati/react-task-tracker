@@ -1,11 +1,25 @@
 import styles from "./footerButton.module.css";
+import {todoStore} from "@/app/taskStore.ts";
+import {Buttons} from "@/utils/enums.ts";
 
-export const FooterButton = ({ children, selected, handler, disabled }: {
-    children: string,
-    selected: boolean,
-    handler: () => void,
-    disabled?: boolean,
+export const FooterButton = ({ button }: {
+    button: Buttons
 }) => {
+
+    let selected: boolean;
+    let handler: () => void;
+    let disabled: boolean;
+
+    if (button === Buttons.ClearCompleted) {
+        selected = false;
+        handler = (() => todoStore.clearCompleted());
+        disabled = todoStore.doneCount == 0;
+    } else {
+        selected = todoStore.selectedButton === button;
+        handler = (() => todoStore.selectButton(button));
+        disabled = false;
+    }
+
     return (
         <button
             className={`
@@ -15,6 +29,6 @@ export const FooterButton = ({ children, selected, handler, disabled }: {
             `}
             onClick={ handler }
             disabled={ disabled || selected }
-        >{ children }</button>
+        >{ button }</button>
     );
 };

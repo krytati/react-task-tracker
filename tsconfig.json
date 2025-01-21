@@ -5,6 +5,7 @@
     "allowJs": true,
     "checkJs": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
     "strictNullChecks": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,9 +19,9 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom"],
+    "types": ["vitest/globals"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     },
     "plugins": [
       {
