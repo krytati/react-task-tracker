@@ -138,7 +138,7 @@ describe('store actions', () => {
         expect(todoStore.stackName).toBe(expectedStackName);
     });
 
-    test('SHOULD add a new task to currentTaskView WHEN All or Active view was selected', async () => {
+    test('SHOULD add a new task to currentTaskView WHEN Active view was selected', async () => {
         //Arrange
         const expectedTaskText = 'new task'
 
@@ -286,7 +286,7 @@ describe('store actions', () => {
         expect(todoStore.currentTaskView).toHaveLength(1);
     });
 
-    test('SHOULD set doneCount correctly', async () => {
+    test('SHOULD get doneCount correctly', async () => {
 
         vi.mocked(tasksService).getTaskSet.mockReturnValue({
             stacks: [{
