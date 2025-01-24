@@ -1,6 +1,7 @@
-import React, {useCallback, useEffect, useState} from "react";
+"use client"
+import React, {useCallback, useState} from "react";
 import {todoStore} from "@/app/taskStore.ts";
-import styles from "@/app/page.module.css";
+import styles from "@/app/Components/sharedTaskStyles.module.css";
 
 export const InputField = () => {
 

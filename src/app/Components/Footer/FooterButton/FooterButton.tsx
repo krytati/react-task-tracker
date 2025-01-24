@@ -1,8 +1,9 @@
 import styles from "./footerButton.module.css";
 import {todoStore} from "@/app/taskStore.ts";
 import {Buttons} from "@/utils/enums.ts";
+import {observer} from "mobx-react-lite";
 
-export const FooterButton = ({ button }: {
+export const FooterButton = observer(({ button }: {
     button: Buttons
 }) => {
 
@@ -31,4 +32,4 @@ export const FooterButton = ({ button }: {
             disabled={ disabled || selected }
         >{ button }</button>
     );
-};
+});

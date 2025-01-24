@@ -1,6 +1,7 @@
 import {generateId} from '@/utils/functions/generateId.ts';
 import {tasksService} from '@/app/services/tasksService.ts';
 import {Buttons, NavStack} from '@/utils/enums.ts';
+import {TaskSet} from "@/utils/types/Task.ts";
 
 vi.mock('../src/app/services/tasksService.ts');
 
@@ -287,7 +288,7 @@ describe('store actions', () => {
     });
 
     test('SHOULD get doneCount correctly', async () => {
-
+        //Arrange
         vi.mocked(tasksService).getTaskSet.mockReturnValue({
             stacks: [{
                 id: 'stackId',
@@ -300,9 +301,99 @@ describe('store actions', () => {
             }]
         });
 
+        //Act
         const { todoStore } = await import('@/app/taskStore.ts');
 
+        //Assert
         expect(todoStore.doneCount).toBe(2);
+    });
+
+    describe('moveTask', () => {
+
+        const stacks: TaskSet = {
+            stacks: [{
+                id: 'stackId',
+                name: 'name',
+                tasks: [
+                    {id: 'taskId1', text: 'text1', state: true},
+                    {id: 'taskId2', text: 'text2', state: true},
+                    {id: 'taskId3', text: 'text3', state: false},
+                    {id: 'taskId4', text: 'text4', state: true},
+                    {id: 'taskId5', text: 'text5', state: true},
+                    {id: 'taskId6', text: 'text6', state: false},
+                ],
+            }],
+        };
+
+        test('SHOULD move a task to a new position #1', async () => {
+            //Arrange
+            vi.mocked(tasksService).getTaskSet.mockReturnValue(stacks);
+            const { todoStore } = await import('@/app/taskStore.ts');
+            const expectedNewIndex = 5;
+            const expectedOldIndex = 3;
+
+            const expectedTasks = [
+                {id: 'taskId1', text: 'text1', state: true},
+                {id: 'taskId2', text: 'text2', state: true},
+                {id: 'taskId3', text: 'text3', state: false},
+                {id: 'taskId5', text: 'text5', state: true},
+                {id: 'taskId6', text: 'text6', state: false},
+                {id: 'taskId4', text: 'text4', state: true},
+            ];
+
+            //Act
+            todoStore.moveTask(expectedNewIndex, expectedOldIndex)
+
+            //Assert
+            expect(todoStore.allTasks).toMatchObject(expectedTasks);
+        });
+
+        test('SHOULD move a task to a new position #2', async () => {
+            //Arrange
+            vi.mocked(tasksService).getTaskSet.mockReturnValue(stacks);
+            const { todoStore } = await import('@/app/taskStore.ts');
+            const expectedNewIndex = 0;
+            const expectedOldIndex = 2;
+
+            const expectedTasks = [
+                {id: 'taskId3', text: 'text3', state: false},
+                {id: 'taskId1', text: 'text1', state: true},
+                {id: 'taskId2', text: 'text2', state: true},
+                {id: 'taskId4', text: 'text4', state: true},
+                {id: 'taskId5', text: 'text5', state: true},
+                {id: 'taskId6', text: 'text6', state: false},
+            ];
+
+            //Act
+            todoStore.moveTask(expectedNewIndex, expectedOldIndex)
+
+            //Assert
+            expect(todoStore.allTasks).toMatchObject(expectedTasks);
+        });
+
+        test('SHOULD move a task to a new position #2', async () => {
+            //Arrange
+            vi.mocked(tasksService).getTaskSet.mockReturnValue(stacks);
+            const { todoStore } = await import('@/app/taskStore.ts');
+            const expectedNewIndex = 4;
+            const expectedOldIndex = 3;
+
+            const expectedTasks = [
+                {id: 'taskId1', text: 'text1', state: true},
+                {id: 'taskId2', text: 'text2', state: true},
+                {id: 'taskId3', text: 'text3', state: false},
+                {id: 'taskId5', text: 'text5', state: true},
+                {id: 'taskId4', text: 'text4', state: true},
+                {id: 'taskId6', text: 'text6', state: false},
+            ];
+
+            //Act
+            todoStore.moveTask(expectedNewIndex, expectedOldIndex)
+
+            //Assert
+            expect(todoStore.allTasks).toMatchObject(expectedTasks);
+        });
+
     });
 
 });

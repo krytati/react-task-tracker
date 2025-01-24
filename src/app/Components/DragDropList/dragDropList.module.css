@@ -1,0 +1,14 @@
+.tasksBox {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow-y: scroll;
+    background: white;
+}
+
+.inlineBox {
+    display: flex;
+    gap: 1em;
+    margin-left: auto;
+}

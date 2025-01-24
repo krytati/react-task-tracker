@@ -1,0 +1,37 @@
+.task {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    height: 3rem;
+    padding: 0.8em 1em;
+    color: var(--text-color);
+    background: white;
+    border-bottom: 1px solid var(--card-background-color);
+    font-size: 1rem;
+}
+
+.taskInput {
+    font-size: 1rem;
+    font-style: italic;
+    border: none;
+    border-bottom: 1px solid var(--card-background-color);
+}
+
+.inlineButton {
+    background: none;
+    color: var(--primary-color);
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.task:hover:not(.taskInput) {
+    transition: background 0.3s ease;
+    background: var(--hover-background-color);
+}
+
+.task:hover:not(.taskInput) .inlineButton {
+    visibility: visible;
+}

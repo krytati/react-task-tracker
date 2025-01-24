@@ -22,98 +22,12 @@
   border: 1px solid var(--border-color);
 }
 
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 7rem;
-  min-width: 0;
-  overflow: hidden;
-  align-items: center;
-  font-size: 5rem;
-  color: var(--primary-color);
-  font-weight: lighter;
-  padding-bottom: 1rem;
-}
-
-.cardHeaderText{
-  overflow-x: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .shadowBox {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
   box-shadow: 3px 4px 5px 0 var(--shadow-color);
-}
-
-.tasksBox {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow-y: scroll;
-  background: white;
-}
-
-.task {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1em;
-  height: 3rem;
-  padding: 0.8em 1em;
-  color: var(--text-color);
-  background: white;
-  border-bottom: 1px solid var(--card-background-color);
-  font-size: 1rem;
-}
-
-.task:hover:not(.taskInput) {
-  transition: background 0.3s ease;
-  background: var(--hover-background-color);
-}
-
-.inlineBox {
-  display: flex;
-  gap: 1em;
-  margin-left: auto;
-}
-
-.inlineButton {
-  background: none;
-  color: var(--primary-color);
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  visibility: hidden;
-}
-
-.task:hover:not(.taskInput) .inlineButton {
-  visibility: visible;
-}
-
-.taskInput {
-  font-size: 1rem;
-  font-style: italic;
-  border: none;
-  border-bottom: 1px solid var(--card-background-color);
-}
-
-.cardFooter {
-  height: 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 1em;
-  font-size: 1rem;
-  color: var(--secondary-text-color);
-  border-top: 1px solid var(--card-background-color);
-  z-index: 3;
 }
 
 .pseudoStack {
@@ -132,17 +46,6 @@
 .lvl2 {
   width: calc(100% - 8px);
   z-index: 1;
-}
-
-.taskCountText {
-  min-width: 6rem;
-}
-
-.tabGroup {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 0 1rem;
 }
 
 @media screen and (max-width: 70rem) {
@@ -168,20 +71,5 @@
 @media screen and (max-height: 45rem){
   .card {
     height: 95lvh;
-  }
-}
-
-@media screen and (max-width: 30rem) {
-  .cardHeader{
-    font-size: 4rem;
-  }
-
-  .cardHeaderText {
-    text-overflow: clip;
-  }
-
-  .cardFooter {
-    height: 6rem;
-    flex-direction: column;
   }
 }

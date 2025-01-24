@@ -1,0 +1,31 @@
+.cardFooter {
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 1em;
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    border-top: 1px solid var(--card-background-color);
+    z-index: 3;
+}
+
+.taskCountText {
+    min-width: 6rem;
+}
+
+.tabGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 1rem;
+}
+
+@media screen and (max-width: 30rem) {
+
+    .cardFooter {
+        height: 6rem;
+        flex-direction: column;
+    }
+}

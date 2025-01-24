@@ -49,6 +49,13 @@ export class TodoStore {
         });
     }
 
+    moveTask(index: number, draggingIndex: number): void {
+        this._produceCurrentStack( (draft) => {
+            const [draggedItem] = draft.splice(draggingIndex, 1);
+            draft.splice(index, 0, draggedItem);
+        });
+    }
+
     addTask = (text: string): void => {
         this._produceCurrentStack( (draft) => {
             draft.push({text: text, id: generateId(), state: false});
