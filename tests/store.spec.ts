@@ -444,7 +444,7 @@ describe('store actions', () => {
             expect(filterTasksSpy).toHaveBeenCalledTimes(1);
         });
 
-        test('SHOULD call filter method WHEN switching stacks', async () => {
+        test('SHOULD call filter method WHEN toggling a task', async () => {
             //Arrange
             const expectedId = generateId();
             mockedTasksService.getTaskSet.mockReturnValue({
