@@ -1,7 +1,7 @@
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import Home from "@/app/page.tsx";
 import {Buttons} from "@/utils/enums.ts";
-import {TodoStore} from "@/app/taskStore.ts";
+import {todoStore, TodoStore} from "@/app/taskStore.ts";
 
 let mockedToDoStore: Partial<TodoStore>;
 
@@ -82,6 +82,38 @@ describe('page.tsx', () => {
             expect(screen.getByText(Buttons.Active)).toBeDisabled();
         });
 
+        test('SHOULD call clearCompleted method WHEN Clear completed button was clicked', () => {
+
+            mockedToDoStore = {
+                clearCompleted: vi.fn(),
+            }
+
+            const clearCompletedSpy = vi.spyOn(todoStore, 'clearCompleted');
+
+            render(<Home/>);
+
+            const clearCompletedButton = screen.getByText(Buttons.ClearCompleted);
+            fireEvent.click(clearCompletedButton);
+
+            expect(clearCompletedSpy).toHaveBeenCalledTimes(1);
+        });
+
+        test('SHOULD not call selectButton method WHEN selected button was clicked again', () => {
+
+            mockedToDoStore = {
+                selectedButton: Buttons.Active,
+                selectButton: vi.fn(),
+            }
+
+            const selectButtonSpy = vi.spyOn(todoStore, 'selectButton');
+
+            render(<Home/>);
+
+            const ActiveButton = screen.getByText(Buttons.Active);
+            fireEvent.click(ActiveButton);
+
+            expect(selectButtonSpy).toHaveBeenCalledTimes(0);
+        });
     });
 
     describe('tasks', () => {

@@ -2,6 +2,7 @@ import {generateId} from '@/utils/functions/generateId.ts';
 import {tasksService} from '@/app/services/tasksService.ts';
 import {Buttons, NavStack} from '@/utils/enums.ts';
 import {TaskSet} from "@/utils/types/Task.ts";
+import {todoStore} from "@/app/taskStore.ts";
 
 vi.mock('../src/app/services/tasksService.ts');
 
@@ -33,7 +34,7 @@ describe('store actions', () => {
         const { todoStore } = await import('@/app/taskStore.ts');
 
         //act
-        todoStore.processTask(expectedId);
+        todoStore.toggleTask(expectedId);
 
         //Assert
         expect(todoStore.allTasks).toMatchObject(expectedTasks);
@@ -392,6 +393,77 @@ describe('store actions', () => {
 
             //Assert
             expect(todoStore.allTasks).toMatchObject(expectedTasks);
+        });
+
+    });
+
+    describe('spy on reactions', () => {
+
+        test('SHOULD call filter method WHEN selected button was reselected', async () => {
+            //Arrange
+            mockedTasksService.getTaskSet.mockReturnValue({
+                stacks: [{
+                    id: 'stackId',
+                    name: 'name',
+                    tasks: [],
+                }]
+            });
+            const { todoStore } = await import('@/app/taskStore.ts');
+            const filterTasksSpy = vi.spyOn(todoStore, 'filterTasks');
+
+            //act
+            todoStore.selectButton(Buttons.Active)
+
+            //Assert
+            expect(filterTasksSpy).toHaveBeenCalledTimes(1);
+        });
+
+        test('SHOULD call filter method WHEN switching stacks', async () => {
+            //Arrange
+            mockedTasksService.getTaskSet.mockReturnValue({
+                stacks: [
+                    {
+                        id: 'stackId1',
+                        name: 'name1',
+                        tasks: [],
+                    },
+                    {
+                        id: 'stackId2',
+                        name: 'name2',
+                        tasks: [],
+                    },
+                ]
+            });
+            const { todoStore } = await import('@/app/taskStore.ts');
+            const filterTasksSpy = vi.spyOn(todoStore, 'filterTasks');
+
+            //act
+            todoStore.switchStack(NavStack.right)
+
+            //Assert
+            expect(filterTasksSpy).toHaveBeenCalledTimes(1);
+        });
+
+        test('SHOULD call filter method WHEN switching stacks', async () => {
+            //Arrange
+            const expectedId = generateId();
+            mockedTasksService.getTaskSet.mockReturnValue({
+                stacks: [
+                    {
+                        id: expectedId,
+                        name: 'name',
+                        tasks: [{id: 'taskId1', text: 'text1', state: false},],
+                    },
+                ]
+            });
+            const { todoStore } = await import('@/app/taskStore.ts');
+            const filterTasksSpy = vi.spyOn(todoStore, 'filterTasks');
+
+            //act
+            todoStore.toggleTask(expectedId);
+
+            //Assert
+            expect(filterTasksSpy).toHaveBeenCalledTimes(1);
         });
 
     });

@@ -27,7 +27,7 @@ export class TodoStore {
         }
     }
 
-    processTask(id: string): void {
+    toggleTask(id: string): void {
         this._produceCurrentStack( (draft) => {
             const task = draft.find(el => el.id === id);
             if (task) {

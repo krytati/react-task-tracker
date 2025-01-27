@@ -6,7 +6,7 @@ import {TaskItem} from "@/utils/types/Task.ts";
 export function Task({ task }: {task: TaskItem}) {
     return (
         <>
-            <CircleCheckbox state={ task.state } handler={() => todoStore.processTask(task.id)}/>
+            <CircleCheckbox state={ task.state } handler={() => todoStore.toggleTask(task.id)}/>
             <span className={ task.state ? styles.done : ''}>
                 { task.text }
             </span>
